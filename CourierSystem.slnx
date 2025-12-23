@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="CourierSystem/CourierSystem.vcxproj" Id="ab29f97a-fcd9-4bb0-8ad9-257768c21e5a" />
+</Solution>
