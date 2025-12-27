@@ -1,6 +1,16 @@
 #include <iostream>
 //#include "Utils.h"
 #include <cstdlib>
+#include "Parcel.h"
+#include "ParcelManager.h"
+#include "Tracking.h"
+
+Tracking trackingSystem;
+
+
+ParcelManager parcelManager;
+
+    
 using namespace std;
 
 // ===== Function Declarations =====
@@ -70,9 +80,37 @@ void mainMenu() {
 }
 
 void parcelMenu() {
-    cout << "\n[Parcel Menu Placeholder]\n";
-    pauseScreen();
+    int choice;
+    do {
+        clearScreen();
+        printHeader();
+
+        cout << "Parcel Management\n";
+        cout << "1. Add New Parcel\n";
+        cout << "2. View All Parcels\n";
+        cout << "3. Process Next Parcel\n";
+        cout << "0. Back\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            parcelManager.addParcel();
+            pauseScreen();
+            break;
+        case 2:
+            parcelManager.viewParcels();
+            pauseScreen();
+            break;
+        case 3:
+            parcelManager.processNextParcel();
+            pauseScreen();
+            break;
+        }
+    } while (choice != 0);
 }
+
+
 
 void routingMenu() {
     cout << "\n[Routing Menu Placeholder]\n";
@@ -80,9 +118,18 @@ void routingMenu() {
 }
 
 void trackingMenu() {
-    cout << "\n[Tracking Menu Placeholder]\n";
+    int id;
+    clearScreen();
+    printHeader();
+
+    cout << "Parcel Tracking\n";
+    cout << "Enter Parcel ID: ";
+    cin >> id;
+
+    trackingSystem.showParcel(id);
     pauseScreen();
 }
+
 
 void courierMenu() {
     cout << "\n[Courier Menu Placeholder]\n";

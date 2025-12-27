@@ -132,6 +132,7 @@
     <ClCompile Include="Heap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Parcel.cpp" />
+    <ClCompile Include="ParcelManager.cpp" />
     <ClCompile Include="Tracking.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +140,7 @@
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Heap.h" />
     <ClInclude Include="Parcel.h" />
+    <ClInclude Include="ParcelManager.h" />
     <ClInclude Include="Tracking.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
