@@ -9,9 +9,29 @@ int Tracking::hashFunction(int id) const {
     return id % TABLE_SIZE;
 }
 
+// Insert ONLY if parcel does not exist
 void Tracking::insert(const Parcel& p) {
     int index = hashFunction(p.getId());
+
+    for (const auto& existing : table[index]) {
+        if (existing.getId() == p.getId()) {
+            return; // already exists
+        }
+    }
     table[index].push_back(p);
+}
+
+// Update existing parcel (KEEP HISTORY)
+bool Tracking::update(const Parcel& p) {
+    int index = hashFunction(p.getId());
+
+    for (auto& existing : table[index]) {
+        if (existing.getId() == p.getId()) {
+            existing = p;   // overwrite with updated parcel (history preserved)
+            return true;
+        }
+    }
+    return false;
 }
 
 bool Tracking::find(int id, Parcel& result) const {

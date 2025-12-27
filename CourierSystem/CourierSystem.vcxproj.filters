@@ -30,10 +30,16 @@
     <ClCompile Include="Tracking.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CourierEngine.cpp">
+    <ClCompile Include="Courier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ParcelManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Routing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CourierOperations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,13 +56,19 @@
     <ClInclude Include="Tracking.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CourierEngine.h">
+    <ClInclude Include="Courier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ParcelManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Routing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CourierOperations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

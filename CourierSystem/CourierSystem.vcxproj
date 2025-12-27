@@ -127,20 +127,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CourierEngine.cpp" />
+    <ClCompile Include="Courier.cpp" />
+    <ClCompile Include="CourierOperations.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Heap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Parcel.cpp" />
     <ClCompile Include="ParcelManager.cpp" />
+    <ClCompile Include="Routing.cpp" />
     <ClCompile Include="Tracking.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CourierEngine.h" />
+    <ClInclude Include="Courier.h" />
+    <ClInclude Include="CourierOperations.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Heap.h" />
     <ClInclude Include="Parcel.h" />
     <ClInclude Include="ParcelManager.h" />
+    <ClInclude Include="Routing.h" />
     <ClInclude Include="Tracking.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>

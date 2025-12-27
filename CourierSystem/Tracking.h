@@ -1,4 +1,4 @@
-#ifndef TRACKING_H
+﻿#ifndef TRACKING_H
 #define TRACKING_H
 
 #include "Parcel.h"
@@ -16,6 +16,7 @@ public:
     Tracking();
 
     void insert(const Parcel& p);
+    bool update(const Parcel& p);     // ADD THIS LINE
     bool find(int id, Parcel& result) const;
     void showParcel(int id) const;
 };
