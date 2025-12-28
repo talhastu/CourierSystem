@@ -1,1 +1,3 @@
-40 3 30 Pindi Created
+2 2 23 karachi Created
+4 3 45 Murree Created
+3 3 34 Islamabad Created

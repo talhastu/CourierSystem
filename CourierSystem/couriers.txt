@@ -1,4 +1,3 @@
-6 Hamza
 7 Fahad
 8 Adeel
 9 Salman
@@ -9,3 +8,4 @@
 19 Safi
 2 Ahmed
 5 Bilal
+6 Hamza

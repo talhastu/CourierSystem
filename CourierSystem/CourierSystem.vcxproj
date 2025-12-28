@@ -129,7 +129,6 @@
   <ItemGroup>
     <ClCompile Include="Courier.cpp" />
     <ClCompile Include="CourierOperations.cpp" />
-    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Heap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Parcel.cpp" />
@@ -140,8 +139,10 @@
   <ItemGroup>
     <ClInclude Include="Courier.h" />
     <ClInclude Include="CourierOperations.h" />
-    <ClInclude Include="Graph.h" />
     <ClInclude Include="Heap.h" />
+    <ClInclude Include="MaxHeap.h" />
+    <ClInclude Include="MyQueue.h" />
+    <ClInclude Include="MyStack.h" />
     <ClInclude Include="Parcel.h" />
     <ClInclude Include="ParcelManager.h" />
     <ClInclude Include="Routing.h" />

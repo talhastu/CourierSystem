@@ -78,7 +78,7 @@ void CourierOperations::viewCouriers() {
     cout << RESET;
 
     // Copy queue so original is NOT destroyed
-    queue<Courier> temp = courierQueue;
+    MyQueue<Courier> temp = courierQueue;
 
     while (!temp.empty()) {
         Courier c = temp.front();
@@ -113,7 +113,7 @@ void CourierOperations::loadFromFile() {
 
 void CourierOperations::saveToFile() {
     ofstream fout(filename);
-    queue<Courier> temp = courierQueue;
+    MyQueue<Courier> temp = courierQueue;
 
     while (!temp.empty()) {
         Courier c = temp.front();

@@ -5,13 +5,16 @@
 #include <vector>
 #include <map>
 
+using namespace std;
+
 class Routing {
 private:
-    std::map<std::string, std::vector<std::pair<std::string, int>>> graph;
+    // Graph: city -> (neighbor city, distance)
+    map<string, vector<pair<string, int>>> graph;
 
 public:
-    void addRoute(std::string from, std::string to, int distance);
-    void findShortestPath(std::string source, std::string destination);
+    void addRoute(string from, string to, int distance);
+    void findShortestPath(string source, string destination);
     void loadDefaultRoutes();
 };
 
