@@ -2,30 +2,31 @@
 #define PARCEL_H
 
 #include <string>
-#include <vector>
+#include <iostream>
+
 using namespace std;
 
 class Parcel {
 private:
     int id;
-    int priority;        // 1 = Overnight, 2 = 2-Day, 3 = Normal
+    int priority;
     float weight;
     string zone;
     string status;
-    vector<string> history;
+
+    string history[10];
+    int historyCount;
 
 public:
-    // Constructor
-    Parcel(int id, int priority, float weight, string zone);
+    Parcel();
+    Parcel(int i, int p, float w, string z);
 
-    // Getters
     int getId() const;
     int getPriority() const;
     float getWeight() const;
     string getZone() const;
     string getStatus() const;
 
-    // Status & history
     void updateStatus(string newStatus);
     void printHistory() const;
 };

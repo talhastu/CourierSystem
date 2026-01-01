@@ -5,20 +5,28 @@
 #include <vector>
 #include <list>
 
+using namespace std;
+
+
 class Tracking {
 private:
     static const int TABLE_SIZE = 101;
-    std::vector<std::list<Parcel>> table;
-
-    int hashFunction(int id) const;
+    vector<list<Parcel>> table;
 
 public:
     Tracking();
 
+    int hashFunction(int id) const;
+
     void insert(const Parcel& p);
-    bool update(const Parcel& p);     // ADD THIS LINE
+    void update(const Parcel& p);   
     bool find(int id, Parcel& result) const;
+
     void showParcel(int id) const;
+
+    void showByStatus(string status) const;
+    void showSummary() const;
 };
+
 
 #endif

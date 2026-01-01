@@ -1,47 +1,48 @@
-#include "Parcel.h"
-#include <iostream>
+﻿#include "Parcel.h"
 
-// Constructor
-Parcel::Parcel(int id, int priority, float weight, string zone) {
-    this->id = id;
-    this->priority = priority;
-    this->weight = weight;
-    this->zone = zone;
+// Default constructor
+Parcel::Parcel() {
+    id = 0;
+    priority = 3;
+    weight = 0.0;
+    zone = "N/A";
+
+    historyCount = 0;
     status = "Created";
-    history.push_back("Parcel Created");
+    history[historyCount++] = "Created";
+    history[historyCount++] = "Processing";   // ✅ added
 }
 
-// Getters
-int Parcel::getId() const {
-    return id;
+// Parameterized constructor
+Parcel::Parcel(int i, int p, float w, string z) {
+    id = i;
+    priority = p;
+    weight = w;
+    zone = z;
+
+    historyCount = 0;
+    status = "Created";
+    history[historyCount++] = "Created";
+    history[historyCount++] = "Processing";   //  added
 }
 
-int Parcel::getPriority() const {
-    return priority;
-}
+int Parcel::getId() const { return id; }
+int Parcel::getPriority() const { return priority; }
+float Parcel::getWeight() const { return weight; }
+string Parcel::getZone() const { return zone; }
+string Parcel::getStatus() const { return status; }
 
-float Parcel::getWeight() const {
-    return weight;
-}
-
-string Parcel::getZone() const {
-    return zone;
-}
-
-string Parcel::getStatus() const {
-    return status;
-}
-
-// Status update
 void Parcel::updateStatus(string newStatus) {
     status = newStatus;
-    history.push_back(newStatus);
+
+    if (historyCount < 10) {
+        history[historyCount++] = newStatus;
+    }
 }
 
-// Print history
 void Parcel::printHistory() const {
-    cout << "\nParcel History:\n";
-    for (const string& event : history) {
-        cout << "- " << event << endl;
+    cout << "\nParcel Status History:\n";
+    for (int i = 0; i < historyCount; i++) {
+        cout << " - " << history[i] << endl;
     }
 }

@@ -1,0 +1,7 @@
+Lahore Islamabad 380 0
+Lahore Faisalabad 120 0
+Lahore Bahawalpur 430 1
+Lahore Muree 120 0
+Faisalabad Multan 240 0
+Bahawalpur Multan 100 0
+Multan Kashmir 200 0

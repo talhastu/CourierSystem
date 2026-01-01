@@ -8,31 +8,31 @@ Tracking::Tracking() {
 int Tracking::hashFunction(int id) const {
     return id % TABLE_SIZE;
 }
-
-// Insert ONLY if parcel does not exist
-void Tracking::insert(const Parcel& p) {
+void Tracking::insert(const Parcel& p) 
+{
     int index = hashFunction(p.getId());
-
     for (const auto& existing : table[index]) {
         if (existing.getId() == p.getId()) {
-            return; // already exists
+            return;
         }
     }
     table[index].push_back(p);
 }
 
-// Update existing parcel (KEEP HISTORY)
-bool Tracking::update(const Parcel& p) {
+void Tracking::update(const Parcel& p) {
     int index = hashFunction(p.getId());
 
-    for (auto& existing : table[index]) {
-        if (existing.getId() == p.getId()) {
-            existing = p;   // overwrite with updated parcel (history preserved)
-            return true;
+    for (auto& stored : table[index]) {
+        if (stored.getId() == p.getId()) {
+            stored = p;   
+            return;
         }
     }
-    return false;
+
+    // If not found, insert
+    table[index].push_back(p);
 }
+
 
 bool Tracking::find(int id, Parcel& result) const {
     int index = hashFunction(id);
@@ -57,3 +57,47 @@ void Tracking::showParcel(int id) const {
         std::cout << "Parcel not found!\n";
     }
 }
+
+
+void Tracking::showByStatus(string status) const {
+    bool found = false;
+
+    cout << "\nParcels with status: " << status << "\n";
+
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        for (const auto& p : table[i]) {
+            if (p.getStatus() == status) {
+                found = true;
+                cout << "ID: " << p.getId()
+                    << " | Zone: " << p.getZone()
+                    << " | Priority: " << p.getPriority()
+                    << endl;
+            }
+        }
+    }
+
+    if (!found) {
+        cout << "No parcels found with this status.\n";
+    }
+}
+
+void Tracking::showSummary() const {
+    int created = 0, dispatched = 0, delivered = 0;
+
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        for (const auto& p : table[i]) {
+            if (p.getStatus() == "Created")
+                created++;
+            else if (p.getStatus() == "Dispatched")
+                dispatched++;
+            else if (p.getStatus() == "Delivered")
+                delivered++;
+        }
+    }
+
+    cout << "\n==== Parcel Tracking Summary ====\n";
+    cout << "Created    : " << created << endl;
+    cout << "Dispatched : " << dispatched << endl;
+    cout << "Delivered  : " << delivered << endl;
+}
+

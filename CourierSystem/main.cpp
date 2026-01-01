@@ -1,5 +1,4 @@
 #include <iostream>
-//#include "Utils.h"
 #include <cstdlib>
 #include "Parcel.h"
 #include "ParcelManager.h"
@@ -7,19 +6,12 @@
 #include "Routing.h"
 #include "CourierOperations.h"
 #include <iomanip>
-
-
     
 using namespace std;
 
-Routing routingSystem;
-
-
+Routing routing;
 Tracking trackingSystem;
-
-
 ParcelManager parcelManager;
-
 CourierOperations courierOps;
 
 
@@ -35,23 +27,21 @@ const string WHITE = "\033[37m";
 // ===== Function Declarations =====
 void mainMenu();
 void parcelMenu();
-void routingMenu();
+void routingMenu(Routing& r);
 void trackingMenu();
 void courierMenu();
-
 void clearScreen();
 void pauseScreen();
 void printHeader();
 
 // ===== main() =====
 int main() {
-    routingSystem.loadDefaultRoutes();
+    srand(time(0));
     courierOps.loadFromFile();
-
-
     mainMenu();
     return 0;
 }
+
 
 // ===== Utility Functions =====
 void clearScreen() {
@@ -106,7 +96,7 @@ void mainMenu() {
 
         switch (choice) {
         case 1: parcelMenu(); break;
-        case 2: routingMenu(); break;
+        case 2: routingMenu(routing); break;
         case 3: trackingMenu(); break;
         case 4: system("cls"); courierMenu(); break;
         case 0: cout << "Exiting system...\n"; break;
@@ -131,7 +121,11 @@ void parcelMenu() {
         cout << GREEN;
         cout << "|  1. Add New Parcel                          |\n";
         cout << "|  2. View All Parcels                        |\n";
-        cout << "|  3. Process Next Parcel                    |\n";
+        cout << "|  3. Process Next Parcel                     |\n";
+        cout << "|  4. Deliver Parcel                          |\n";
+        cout << "|  5. Recover Lost Parcel                     |\n";
+
+
         cout << RESET;
 
         cout << RED;
@@ -165,99 +159,137 @@ void parcelMenu() {
             parcelManager.processNextParcel();
             pauseScreen();
             break;
+        case 4:
+            cout << CYAN << "+--- Deliver Parcel ---------------------------+\n" << RESET;
+            parcelManager.deliverParcel();
+            pauseScreen();
+            break;
+        case 5:
+            cout << CYAN << "+--- Deliver Parcel ---------------------------+\n" << RESET;
+            parcelManager.recoverParcel();
+            break;
+
         }
     } while (choice != 0);
 }
 
 
 
-void routingMenu() {
-    string source, destination;
+void routingMenu(Routing& r) {
+    int choice;
+    do {
+        clearScreen();
 
-    // List of valid cities
-    string cities[] = {
-        "Karachi", "Lahore", "Islamabad",
-        "Peshawar", "Quetta", "Multan"
-    };
+        cout << CYAN;
+        cout << "+=============================================+\n";
+        cout << "|                Routing Management            |\n";
+        cout << "+=============================================+\n";
+        cout << RESET;
 
-    bool validSource = false, validDestination = false;
+        cout << GREEN;
+        cout << "|  1. Add New Route                           |\n";
+        cout << "|  2. View All Routes                        |\n";
+        cout << "|  3. Find Shortest Route                    |\n";
+        cout << "|  4. Block Route                            |\n";
+        cout << "|  5. Unblock Route                          |\n";
+        cout << RESET;
 
-    clearScreen();
-
-    cout << CYAN;
-    cout << "+=============================================+\n";
-    cout << "|               Parcel Routing                |\n";
-    cout << "+=============================================+\n";
-    cout << RESET;
-
-    cout << " Enter Source City      : ";
-    cin >> source;
-    cout << " Enter Destination City : ";
-    cin >> destination;
-
-    // Validate source city
-    for (string c : cities) {
-        if (source == c) {
-            validSource = true;
-            break;
-        }
-    }
-
-    // Validate destination city
-    for (string c : cities) {
-        if (destination == c) {
-            validDestination = true;
-            break;
-        }
-    }
-
-    if (!validSource || !validDestination) {
         cout << RED;
-        cout << "\n Invalid city entered!\n";
-        cout << " Available cities are:\n";
+        cout << "|  0. Back                                   |\n";
         cout << RESET;
 
-        cout << YELLOW;
-        for (string c : cities) {
-            cout << " - " << c << "\n";
+        cout << CYAN;
+        cout << "+=============================================+\n";
+        cout << RESET;
+
+        cout << " Enter choice: ";
+        cin >> choice;
+
+        clearScreen();
+
+        switch (choice) {
+        case 1:
+            r.addRoute();
+            break;
+        case 2:
+            r.viewRoutes();
+            break;
+        case 3:
+            r.findShortestPath();
+            break;
+        case 4:
+            r.blockRoute();
+            break;
+        case 5:
+            r.unblockRoute();
+            break;
+        case 0:
+            return;
+        default:
+            cout << RED << " Invalid choice!" << RESET << endl;
         }
-        cout << RESET;
 
-        pauseScreen();
-        return;
-    }
-
-    cout << CYAN;
-    cout << "+---------------------------------------------+\n";
-    cout << RESET;
-
-    routingSystem.findShortestPath(source, destination);
-    pauseScreen();
+        system("pause");
+    } while (true);
 }
 
 
 
 void trackingMenu() {
-    int id;
-    clearScreen();
+    int choice;
+    do {
+        clearScreen();
+        printHeader();
 
-    cout << CYAN;
-    cout << "+=============================================+\n";
-    cout << "|               Parcel Tracking               |\n";
-    cout << "+=============================================+\n";
-    cout << RESET;
+        cout << CYAN;
+        cout << "+=====================================+\n";
+        cout << "|         Parcel Tracking Menu        |\n";
+        cout << "+=====================================+\n";
+        cout << RESET;
 
-    cout << " Enter Parcel ID: ";
-    cin >> id;
+        cout << GREEN;
+        cout << "| 1. Track Parcel by ID               |\n";
+        cout << "| 2. View Dispatched Parcels          |\n";
+        cout << "| 3. View Delivered Parcels           |\n";
+        cout << "| 4. View Pending Parcels             |\n";
+        cout << "| 5. Tracking Summary Report          |\n";
+        cout << RESET;
 
-    cout << CYAN;
-    cout << "+---------------------------------------------+\n";
-    cout << RESET;
+        cout << RED;
+        cout << "| 0. Back                             |\n";
+        cout << RESET;
 
-    trackingSystem.showParcel(id);
-    pauseScreen();
+        cout << CYAN;
+        cout << "+=====================================+\n";
+        cout << RESET;
+
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1: {
+            int id;
+            cout << "Enter Parcel ID: ";
+            cin >> id;
+            trackingSystem.showParcel(id);
+            break;
+        }
+        case 2:
+            trackingSystem.showByStatus("Dispatched");
+            break;
+        case 3:
+            trackingSystem.showByStatus("Delivered");
+            break;
+        case 4:
+            trackingSystem.showByStatus("Created");
+            break;
+        case 5:
+            trackingSystem.showSummary();
+            break;
+        }
+        pauseScreen();
+    } while (choice != 0);
 }
-
 
 
 void courierMenu() {

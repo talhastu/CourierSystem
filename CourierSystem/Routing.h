@@ -3,19 +3,34 @@
 
 #include <string>
 #include <vector>
-#include <map>
 
 using namespace std;
 
+
 class Routing {
 private:
-    // Graph: city -> (neighbor city, distance)
-    map<string, vector<pair<string, int>>> graph;
+    static const int MAX_CITIES = 20;
+
+    string cities[MAX_CITIES];
+    int cityCount;
+    int distance[MAX_CITIES][MAX_CITIES];
+    bool blocked[MAX_CITIES][MAX_CITIES];
+
+
+    int getCityIndex(string city);
+
+    void loadRoutesFromFile();
+    void saveRouteToFile();
 
 public:
-    void addRoute(string from, string to, int distance);
-    void findShortestPath(string source, string destination);
-    void loadDefaultRoutes();
+    Routing();
+
+    void addRoute();
+    void viewRoutes();
+    void findShortestPath();
+    void blockRoute();
+    void unblockRoute();
+
 };
 
 #endif
